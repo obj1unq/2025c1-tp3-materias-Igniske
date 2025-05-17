@@ -7,6 +7,44 @@ describe "Alumno"{
     const objetosUno = new Materia( nombre = "Objetos 1")
     const juan = new Alumno()
 
+    const programacion = new Programacion()
+    const medicina = new Medicina()
+    const derecho = new Derecho()
+
+    const roque = new Alumno(
+    materiasAprobadas = [
+        new MateriaAprobada(materia = materiasFactory.crearObjetos1(), nota = 7),
+        new MateriaAprobada(materia = materiasFactory.crearElementosDeProgramacion(), nota = 7),
+        new MateriaAprobada(materia = materiasFactory.crearMatematica1(), nota = 7),
+        new MateriaAprobada(materia = materiasFactory.crearBasesDeDatos(), nota = 7),
+        new MateriaAprobada(materia = materiasFactory.crearQuimica(), nota = 7),
+        new MateriaAprobada(materia = materiasFactory.crearBiologia1(), nota = 7)
+    ],
+    carrerasInscriptas = #{programacion, medicina}
+)
+
+    const luisa = new Alumno(
+        materiasAprobadas = [
+            new MateriaAprobada(materia = materiasFactory.crearObjetos1(), nota = 7),
+            new MateriaAprobada(materia = materiasFactory.crearElementosDeProgramacion(), nota = 7),
+            new MateriaAprobada(materia = materiasFactory.crearMatematica1(), nota = 7)
+        ], carrerasInscriptas = #{programacion}
+    )
+    
+    const romina = new Alumno(
+        materiasAprobadas = [
+            new MateriaAprobada(materia = materiasFactory.crearObjetos1(), nota = 7),
+            new MateriaAprobada(materia = materiasFactory.crearElementosDeProgramacion(), nota = 7),
+            new MateriaAprobada(materia = materiasFactory.crearMatematica1(), nota = 7)
+        ], carrerasInscriptas = #{programacion}
+    )
+
+    const ana = new Alumno(
+        materiasAprobadas = [
+            new MateriaAprobada(materia = materiasFactory.crearElementosDeProgramacion(), nota = 7)
+        ], carrerasInscriptas = #{Programacion}
+    )
+
     test "cantidad de materias"{
         juan.registrarMateriaAprobada(elementosDeProgramacion, 7)
         assert.equals(1, juan.cantidadDeMateriasAprobadas())
@@ -35,5 +73,6 @@ describe "Alumno"{
         juan.registrarMateriaAprobada(elementosDeProgramacion, 7)
         //Verificar como probar excepciones
         //juan.registrarMateriaAprobada(elementosDeProgramacion, 7)
-    }    
+    }   
+
 }
