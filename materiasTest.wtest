@@ -1,0 +1,78 @@
+import materias.*
+
+describe "Alumno"{
+    
+    const elementosDeProgramacion = new Materia( nombre = "Elementos de programacion")
+    const matematicaUno = new Materia( nombre = "Matematica 1")
+    const objetosUno = new Materia( nombre = "Objetos 1")
+    const juan = new Alumno()
+
+    const programacion = new Programacion()
+    const medicina = new Medicina()
+    const derecho = new Derecho()
+
+    const roque = new Alumno(
+    materiasAprobadas = [
+        new MateriaAprobada(materia = materiasFactory.crearObjetos1(), nota = 7),
+        new MateriaAprobada(materia = materiasFactory.crearElementosDeProgramacion(), nota = 7),
+        new MateriaAprobada(materia = materiasFactory.crearMatematica1(), nota = 7),
+        new MateriaAprobada(materia = materiasFactory.crearBasesDeDatos(), nota = 7),
+        new MateriaAprobada(materia = materiasFactory.crearQuimica(), nota = 7),
+        new MateriaAprobada(materia = materiasFactory.crearBiologia1(), nota = 7)
+    ],
+    carrerasInscriptas = #{programacion, medicina}
+)
+
+    const luisa = new Alumno(
+        materiasAprobadas = [
+            new MateriaAprobada(materia = materiasFactory.crearObjetos1(), nota = 7),
+            new MateriaAprobada(materia = materiasFactory.crearElementosDeProgramacion(), nota = 7),
+            new MateriaAprobada(materia = materiasFactory.crearMatematica1(), nota = 7)
+        ], carrerasInscriptas = #{programacion}
+    )
+    
+    const romina = new Alumno(
+        materiasAprobadas = [
+            new MateriaAprobada(materia = materiasFactory.crearObjetos1(), nota = 7),
+            new MateriaAprobada(materia = materiasFactory.crearElementosDeProgramacion(), nota = 7),
+            new MateriaAprobada(materia = materiasFactory.crearMatematica1(), nota = 7)
+        ], carrerasInscriptas = #{programacion}
+    )
+
+    const ana = new Alumno(
+        materiasAprobadas = [
+            new MateriaAprobada(materia = materiasFactory.crearElementosDeProgramacion(), nota = 7)
+        ], carrerasInscriptas = #{Programacion}
+    )
+
+    test "cantidad de materias"{
+        juan.registrarMateriaAprobada(elementosDeProgramacion, 7)
+        assert.equals(1, juan.cantidadDeMateriasAprobadas())
+
+        juan.registrarMateriaAprobada(matematicaUno, 10)
+        juan.registrarMateriaAprobada(objetosUno, 7)
+        assert.equals(3, juan.cantidadDeMateriasAprobadas())
+    }
+
+    test "promedio entre materias aprobadas"{
+        juan.registrarMateriaAprobada(elementosDeProgramacion, 7)
+        juan.registrarMateriaAprobada(matematicaUno, 10)
+        juan.registrarMateriaAprobada(objetosUno, 7)
+        assert.equals(8, juan.promedioEntreMateriasAprobadas())
+        assert.notEquals(10, juan.promedioEntreMateriasAprobadas())
+    }
+
+    test "tiene aprobada cierta materia"{
+        juan.registrarMateriaAprobada(elementosDeProgramacion, 7)
+        juan.registrarMateriaAprobada(objetosUno, 7)
+        assert.that(juan.tieneAprobada(objetosUno))
+        assert.notThat(juan.tieneAprobada(matematicaUno))
+    }
+
+    test "si ya tiene registrada la aprobación de la materia, se lance un error"{
+        juan.registrarMateriaAprobada(elementosDeProgramacion, 7)
+        //Verificar como probar excepciones
+        //juan.registrarMateriaAprobada(elementosDeProgramacion, 7)
+    }   
+
+}
